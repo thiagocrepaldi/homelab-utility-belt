@@ -34,20 +34,24 @@ import logging
 from base64 import b64encode
 from datetime import datetime
 from lxml import etree
-from urllib.parse import urlparse
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+     from urlparse import urlparse
 
 REQUEST_TIMEOUT = 5.0
 
 
-class IPMIUpdater:
+class IPMIUpdater(object):
     def __init__(self, session, ipmi_url):
         self.session = session
         self.ipmi_url = ipmi_url
 
-        self.login_url = f'{ipmi_url}/cgi/login.cgi'
-        self.cert_info_url = f'{ipmi_url}/cgi/ipmi.cgi'
-        self.upload_cert_url = f'{ipmi_url}/cgi/upload_ssl.cgi'
-        self.url_redirect_template = f'{ipmi_url}/cgi/url_redirect.cgi?url_name=%s'
+        self.login_url = '{}/cgi/login.cgi'.format(ipmi_url)
+        self.cert_info_url = '{}/cgi/ipmi.cgi'.format(ipmi_url)
+        self.upload_cert_url = '{}/cgi/upload_ssl.cgi'.format(ipmi_url)
+        self.url_redirect_template = '{}/cgi/url_redirect.cgi?url_name=%s'.format(ipmi_url)
 
         self.use_b64encoded_login = True
 
@@ -254,8 +258,8 @@ class IPMIUpdater:
 
 class IPMIX10Updater(IPMIUpdater):
     def __init__(self, session, ipmi_url):
-        super().__init__(session, ipmi_url)
-        self.reboot_url = f'{ipmi_url}/cgi/BMCReset.cgi'
+        super(IPMIX10Updater, self).__init__(session, ipmi_url)
+        self.reboot_url = '{}/cgi/BMCReset.cgi'.format(ipmi_url)
         self.use_b64encoded_login = False
 
     def _get_op_data(self, op, r):
@@ -316,7 +320,11 @@ def main():
         args.ipmi_url = args.ipmi_url[0:-1]
 
     if args.log_level > 1:
-        import http.client as http_client
+        try:
+            import httplib as http_client
+        except ImportError:
+            import http.client as http_client
+
         http_client.HTTPConnection.debuglevel = 1
 
         # Enable reuest logging
@@ -333,7 +341,7 @@ def main():
 
     # Login to the UI and save credentials for future reuse
     if args.log_level > 0:
-        print('{}\nAuthenticating on Supermicro IPMI!\n{}'.format('*'*128, '*'*128))
+        print('{}\nAuthenticating on Supermicro IPMI!\n{}'.format('*'*80, '*'*80))
     if not updater.login(args.username, args.password):
         print("Login failed. Cannot continue!")
         exit(2)
@@ -342,7 +350,7 @@ def main():
 
     # Fetch current cert info
     if args.log_level > 0:
-        print('\n{}\nFetching current IPMI certificate!\n{}'.format('*'*128, '*'*128))
+        print('\n{}\nFetching current IPMI certificate!\n{}'.format('*'*80, '*'*80))
     cert_info = updater.get_ipmi_cert_info()
     if not cert_info:
         print("Failed to extract certificate information from IPMI!")
@@ -356,7 +364,7 @@ def main():
 
     # Upload new cert
     if args.log_level > 0:
-        print('\n{}\nUploading new IPMI certificate!\n{}'.format('*'*128, '*'*128))
+        print('\n{}\nUploading new IPMI certificate!\n{}'.format('*'*80, '*'*80))
     if not updater.upload_cert(args.key_file, args.cert_file):
         print("Failed to upload X.509 files to IPMI!")
         exit(2)
@@ -366,7 +374,7 @@ def main():
     # Verify new cert was uploaded and is valid
     if args.log_level > 0:
         print('\n{}\nChecking new IPMI certificate was properly uploaded!\n{}'.format(
-            '*'*128, '*'*128))
+            '*'*80, '*'*80))
     cert_valid = updater.get_ipmi_cert_valid()
     if not cert_valid:
         print("New IPMI certificate failed validation")
@@ -376,7 +384,7 @@ def main():
 
     # Validate new IPMI certificate
     if args.log_level > 0:
-        print("\n{}\nFetching new IPMI certificate!\n{}".format('*'*128, '*'*128))
+        print("\n{}\nFetching new IPMI certificate!\n{}".format('*'*80, '*'*80))
     cert_info = updater.get_ipmi_cert_info()
     if not cert_info or not cert_info['has_cert']:
         print("Failed to extract certificate information from IPMI!")
@@ -389,13 +397,13 @@ def main():
     if not args.no_reboot:
         if args.log_level > 0:
             print("\n{}\nRebooting IPMI to apply changes!\n{}".format(
-                '*'*128, '*'*128))
+                '*'*80, '*'*80))
         if not updater.reboot_ipmi():
             print("\n{}\nRebooting failed! Go reboot it manually?\n{}".format(
-                '*'*128, '*'*128))
+                '*'*80, '*'*80))
 
     if args.log_level > 0:
-        print("\n{}\nAll done!\n{}".format('*'*128, '*'*128))
+        print("\n{}\nAll done!\n{}".format('*'*80, '*'*80))
 
 
 if __name__ == "__main__":
