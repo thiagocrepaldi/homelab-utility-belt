@@ -4,9 +4,14 @@ A set of utilities to help managing a homelab
 # Content
 - [Homelab utility belt](#homelab-utility-belt)
 - [Content](#content)
-  - [Supermicro IPMI certificate updater](#supermicro-ipmi-certificate-updater)
+  - [Supermicro](#supermicro)
+    - [IPMI certificate updater](#ipmi-certificate-updater)
+  - [Synology](#synology)
+    - [IPMI certificate updater on DSM](#ipmi-certificate-updater-on-dsm)
 
-## Supermicro IPMI certificate updater
+## Supermicro
+
+### IPMI certificate updater
 
 Requirements: Python 2.7+ or Python 3 with modules listed at `requirements.txt`
 
@@ -72,3 +77,24 @@ Rebooting IPMI to apply changes!
 ********************************************************************************************************************************
 All done!
 ********************************************************************************************************************************
+```
+## Synology
+
+### IPMI certificate updater on DSM
+
+This is pretty much the same [script for IPMI certificate updater](#ipmi-certificate-updater) but wrapped on a Almquist shell so that it can be automated from a Synology NAS.
+
+How to get started:
+```bash
+bash ipmi-updater.sh -p PYTHON -i INSTALL_DIR -c CERT -k KEY -a USERNAME -s SECRET -u URL -v VERBOSE
+
+# Arguments:
+#  -p PYTHON             Python binary name, such as 'python2' or 'python3'
+#  -i INSTALL_DIR        Temporary dir to download IPMI updater scripts
+#  -c CERT               Filename for the new certificate file
+#  -k KEY                Filename for the private key
+#  -a USERNAME           Username with admin access
+#  -s SECRET             Password for the username
+#  -u URL                IPMI URL, including http/https
+#  -v VERBOSE            Log level (0: quiet, 1: info, 2: debug)
+```
