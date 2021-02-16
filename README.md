@@ -86,7 +86,7 @@ This is pretty much the same [script for IPMI certificate updater](#ipmi-certifi
 
 How to get started:
 ```bash
-bash ipmi-updater.sh -p PYTHON -i INSTALL_DIR -c CERT -k KEY -a USERNAME -s SECRET -u URL -v VERBOSE
+bash supermicro-ipmi-updater.sh -p PYTHON -i INSTALL_DIR -c CERT -k KEY -a USERNAME -s SECRET -u URL -v VERBOSE
 
 # Arguments:
 #  -p PYTHON             Python binary name, such as 'python2' or 'python3'
