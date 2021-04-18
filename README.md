@@ -8,6 +8,8 @@ A set of utilities to help managing a homelab
     - [IPMI certificate updater](#ipmi-certificate-updater)
   - [Synology](#synology)
     - [IPMI certificate updater on DSM](#ipmi-certificate-updater-on-dsm)
+    - [Copy LetsEncrypt SSL certificate from pfSense into Synology DSM](#copy-letsencrypt-ssl-certificate-from-pfsense-into-synology-dsm)
+    - [Install LetsEncrypt SSL certificate from pfSense into Synology DSM](#install-letsencrypt-ssl-certificate-from-pfsense-into-synology-dsm)
 
 ## Supermicro
 
@@ -97,4 +99,33 @@ bash supermicro-ipmi-updater.sh -p PYTHON -i INSTALL_DIR -c CERT -k KEY -a USERN
 #  -s SECRET             Password for the username
 #  -u URL                IPMI URL, including http/https
 #  -v VERBOSE            Log level (0: quiet, 1: info, 2: debug)
+```
+
+### Copy LetsEncrypt SSL certificate from pfSense into Synology DSM
+
+This scripts copy the specified LetsEncrypt certificate issue by your pfSense into a share and then install it on your Synology DSM
+
+How to get started:
+```bash
+bash install_letsencrypt_cert_from_pfsense.sh -s LETSENCRYPT_SHARE -n CERTIFICATE_NAME -p PFSENSE_SSH_PORT -u PFSENSE_USERNAME -h PFSENSE_HOSTNAME
+
+# Arguments:
+#  -s LETSENCRYPT_SHARE    Full share path to download the LetsEncrypt certificates into (e.g. /volume1/LetsEncrypt)
+#  -n CERTIFICATE_NAME     Let's Encrypt certificate name as displayed on pfSense UI (e.g. SynologySSL)
+#  -p PFSENSE_SSH_PORT     SSH port for the pfSense (e.g. -p 22)
+#  -u PFSENSE_USERNAME     Username (with proper SSH keys) for the pfSense - cannot be 'admin' (-u synouser)
+#  -h PFSENSE_HOSTNAME     pfSense hostame (e.g. mypfsense.lan.example.com)
+```
+
+### Install LetsEncrypt SSL certificate from pfSense into Synology DSM
+
+This scripts installs the specified LetsEncrypt certificate issue by your pfSense from a local share into your Synology DSM
+
+How to get started:
+```bash
+bash install_letsencrypt_cert_from_pfsense.sh -s LETSENCRYPT_SHARE -n CERTIFICATE_NAME
+
+# Arguments:
+#  -s LETSENCRYPT_SHARE    Full share path to download the LetsEncrypt certificates into (e.g. /volume1/LetsEncrypt)
+#  -n CERTIFICATE_NAME     Let's Encrypt certificate name as displayed on pfSense UI (e.g. SynologySSL)
 ```
