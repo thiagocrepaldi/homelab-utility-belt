@@ -14,6 +14,7 @@ done
 [ -z "${CERTIFICATE_NAME}" ] && echo "Set Certificate name as displayed (case sensitive) on pfSense UI -n (e.g. -n Synology)" && exit 1
 
 # Existing certificates are replaced below
+DSM_MAJOR_VERSION=$([[ $(grep majorversion /etc/VERSION) =~ [0-9] ]] && echo ${BASH_REMATCH[0]})
 DEFAULT_CERT_ROOT_DIR="/usr/syno/etc/certificate"
 DEFAULT_ARCHIVE_CERT_DIR="${DEFAULT_CERT_ROOT_DIR}/_archive"
 DEFAULT_ARCHIVE_CERT_NAME=${DEFAULT_ARCHIVE_CERT_DIR}/$(cat ${DEFAULT_ARCHIVE_CERT_DIR}/DEFAULT)
@@ -30,6 +31,16 @@ for _dir in ${EXISTING_CERT_FOLDERS} ${DEFAULT_ARCHIVE_CERT_NAME}; do
 done
 
 # Restart web server
-synoservice --restart nginx
-synoservice --restart nmbd
-synoservice --restart avahi
+if [[ ${DSM_MAJOR_VERSION} == 6 ]]; then
+    synoservice --restart nginx
+    synoservice --restart nmbd
+    synoservice --restart smbd
+    synoservice --restart avahi
+    synoservice --restart pkgctl-WebStation.service
+else
+    synosystemctl restart nginx
+    synosystemctl restart pkg-synosamba-nmbd.service
+    synosystemctl restart pkg-synosamba-smbd.service
+    synosystemctl restart avahi
+    synosystemctl restart pkgctl-WebStation.service
+fi
