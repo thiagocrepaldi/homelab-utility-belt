@@ -43,3 +43,4 @@ else
     systemctl restart pkg-synosamba-smbd.service
     systemctl restart avahi
     systemctl restart pkgctl-WebStation.service
+fi
