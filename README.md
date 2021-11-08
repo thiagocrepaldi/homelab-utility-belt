@@ -107,7 +107,7 @@ This scripts copy the specified LetsEncrypt certificate issue by your pfSense in
 
 How to get started:
 ```bash
-bash install_letsencrypt_cert_from_pfsense.sh -s LETSENCRYPT_SHARE -n CERTIFICATE_NAME -p PFSENSE_SSH_PORT -u PFSENSE_USERNAME -h PFSENSE_HOSTNAME
+bash copy_letsencrypt_cert_from_pfsense.sh -s LETSENCRYPT_SHARE -n CERTIFICATE_NAME -p PFSENSE_SSH_PORT -u PFSENSE_USERNAME -h PFSENSE_HOSTNAME
 
 # Arguments:
 #  -s LETSENCRYPT_SHARE    Full share path to download the LetsEncrypt certificates into (e.g. /volume1/LetsEncrypt)

@@ -7,11 +7,36 @@ do
     case "${flag}" in
         s) LETSENCRYPT_SHARE=${OPTARG};;
         n) CERTIFICATE_NAME=${OPTARG};;
+        f) CERTIFICATE_PATH=${OPTARG};;
     esac
 done
 
-[ -z "${LETSENCRYPT_SHARE}" ] && echo "Set Let's Encrypt share path through -s (e.g. -s /volume1/LetsEncrypt)" && exit 1
-[ -z "${CERTIFICATE_NAME}" ] && echo "Set Certificate name as displayed (case sensitive) on pfSense UI -n (e.g. -n Synology)" && exit 1
+display_help=0
+if [[ -z "${CERTIFICATE_PATH}" ]]; then
+    [[ -z "${LETSENCRYPT_SHARE}" ]]  && display_help=1
+    [[ -z "${CERTIFICATE_NAME}" ]] && display_help=1
+    [[ -n "${CERTIFICATE_PATH}" ]] && echo "-f should not be used with -s -n"  && display_help=1
+else
+    [[ ! -f "${CERTIFICATE_PATH}" ]] && echo "${CERTIFICATE_PATH} : File not found" && display_help=1
+    [[ -n "${LETSENCRYPT_SHARE}" || -n "${CERTIFICATE_NAME}" ]] && echo "-f should not be used with -s -n"  && display_help=1
+fi
+
+if [[ "${display_help}" ]]; then
+    echo << __EO_HELP__
+This script updates the Synology CRT with a renewed one then restarts services if needed.
+
+You may use it in 2 ways:
+
+1) With a share and a certificate name:
+-s crt_share : Set Let's Encrypt share path (e.g. -s /volume1/LetsEncrypt)
+-n crt_name :  Set Certificate name as displayed (case sensitive) on pfSense UI (e.g. -n Synology)
+
+2) With the CRT full path:
+-f crt_path : Set Let's Encrypt crt path (e.g. -f /volume1/docker/swag/etc/letsencrypt/live/my.domain.com/priv-fullchain-bundle.pem)
+
+__EO_HELP__
+
+exit
 
 # Existing certificates are replaced below
 DSM_MAJOR_VERSION=$([[ $(grep majorversion /etc/VERSION) =~ [0-9] ]] && echo ${BASH_REMATCH[0]})
@@ -43,3 +68,4 @@ else
     systemctl restart pkg-synosamba-smbd.service
     systemctl restart avahi
     systemctl restart pkgctl-WebStation.service
+fi
