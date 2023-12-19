@@ -40,6 +40,7 @@
   <channel update="i" site="clarotv.com.br" site_id="11_#_1868" xmltv_id="12.1 EPTV">12.1 EPTV</channel>
   <!-- 12.2 Missing EducaTV -->
   <channel update="i" site="hagah.com.br" site_id="rbi" xmltv_id="13.1 RBI">13.1 RBI</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH891" xmltv_id="18 Gazeta">18 Gazeta</channel>
   <channel update="i" site="clarotv.com.br" site_id="11_#_521" xmltv_id="23.1 TV Seculo 21">23.1 TV Seculo 21</channel>
   <channel update="i" site="vivo.com.br" site_id="LCH921" xmltv_id="30.1 VTV SBT">30.1 VTV SBT</channel>
   <channel update="i" site="clarotv.com.br" site_id="11_#_484" xmltv_id="32.1 Rede Vida">32.1 Rede Vida</channel>

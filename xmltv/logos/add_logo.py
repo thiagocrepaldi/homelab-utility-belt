@@ -45,7 +45,8 @@ def main():
         icon = ""
         icon_element = channel.getElementsByTagName("icon")
         if len(icon_element) > 0:
-            icon = icon_element.getAttribute("src").strip()
+            assert len(icon_element) == 1
+            icon = icon_element[0].getAttribute("src").strip()
         xmltv_channels[xmltv_id] = icon
 
     # Read the logos file
@@ -81,7 +82,8 @@ def main():
         new_icon = xmltv_channels[xmltv_id]
         icon_element = channel.getElementsByTagName("icon")
         if len(icon_element) > 0:
-            icon = icon_element.getAttribute("src").strip()
+            assert len(icon_element) == 1
+            icon = icon_element[0].getAttribute("src").strip()
 
         if (len(icon) == 0 and len(new_icon) > 0) or icon != new_icon:
             if not icon_element:
