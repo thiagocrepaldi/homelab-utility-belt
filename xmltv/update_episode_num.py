@@ -1,6 +1,6 @@
 import argparse
 import xml
-from xml.dom.minidom import parse, parseString
+from xml.dom.minidom import parse
 
 
 def add_episode_num(

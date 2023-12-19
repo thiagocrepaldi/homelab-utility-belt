@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<settings>
+  <!-- for detailed info about the settings see http://webgrabplus.com/documentation/configuration/webgrabconfigxml 
+  and http://webgrabplus.com/sites/default/files/downloads/Misc/Documented_Configuration_Files_0.zip -->
+  <filename>guide.xml</filename>
+  <mode>
+  </mode>
+  <postprocess grab="y" run="y">/usr/bin/python3 /home/thiago/dev/github/homelab-utility-belt/xmltv/update_episode_num.py --guide /home/thiago/.wg++/guide.xml --save-to /home/thiago/.wg++/guide_with_episode_num.xml</postprocess>
+  <postprocess grab="y" run="y">/usr/bin/python3 /home/thiago/dev/github/homelab-utility-belt/xmltv/logos/add_logo.py --xmltv_in=/home/thiago/.wg++/guide_with_episode_num.xml --logos=/home/thiago/dev/github/homelab-utility-belt/xmltv/logos/my_logos.ini --xmltv_out guide_with_episode_num_icon.xml</postprocess>
+  <user-agent>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 Edg/79.0.309.71</user-agent>
+  <!-- for siteini's that need a decrypt_userkey-->
+  <!--<decryptkey site="clarotv.com.br.EK">4K4ZbJ</decryptkey>-->
+  <decryptkey site="mi.tv">da6158c8</decryptkey>
+  <!-- add the correct license id values in the next line -->
+  <license wg-username="cybervader" registered-email="cybervader@protonmail.com" password="da6158c8">To force a license update; replace this text with the letter f</license>
+  <logging>on</logging>
+  <retry time-out="5">4</retry>
+  <timespan>14</timespan>
+  <update>f</update>
+  <!--
+            Replace the next dummy channel entry with the channels you want.
+			You can look into the installed siteini.pack folder on your computer
+  
+            For the latest version,
+            see http://webgrabplus.com/epg-channels for the available sites/channels
+			or https://github.com/SilentButeo2/webgrabplus-siteinipack/tree/master/siteini.pack
+  -->
+  <channel update="i" site="clarotv.com.br" site_id="11_#_592" xmltv_id="02.1 Record News">02.1 Record News </channel>
+  <channel update="i" site="clarotv.com.br" site_id="11_#_408" xmltv_id="04.1 Band Mais">04.1 Band Mais</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH1316" xmltv_id="06.1 TV Thathi">06.1 TV Thathi</channel>
+  <!-- 08.1 Missing RF TV at https://www.rftvoficial.com.br/programacao/ -->
+  <channel update="i" site="clarotv.com.br" site_id="11_#_2066" xmltv_id="10.1 TV Cultura Paulista">10.1 TV Cultura Paulista</channel>
+  <channel update="i" site="mi.tv" site_id="br##br_bfb2e086-4b15-4a62-9539-20eccab4c707" xmltv_id="10.2 Univesp TV">10.2 Univesp TV</channel>
+  <!-- 10.3 Educacao - maybe TV Cultura Educacao or TV Educacao -->
+  <channel update="i" site="hagah.com.br" site_id="tv-camara" xmltv_id="11.1 TV Camara">11.1 TV Camara</channel>
+  <channel update="i" site="mi.tv" site_id="br##br_53bed41f-18f9-418e-9c2e-747b8a033cdd" xmltv_id="11.2 TV ALESP">11.2 TV ALESP</channel>
+  <channel update="i" site="clarotv.com.br" site_id="11_#_1975" xmltv_id="11.3 TV Camara Campinas">11.3 TV Camara Campinas</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH102" xmltv_id="11.4 TV Senado">11.4 TV Senado</channel>
+  <!-- 11.5 Missing Radio Camara -->
+  <channel update="i" site="clarotv.com.br" site_id="11_#_1868" xmltv_id="12.1 EPTV">12.1 EPTV</channel>
+  <!-- 12.2 Missing EducaTV -->
+  <channel update="i" site="hagah.com.br" site_id="rbi" xmltv_id="13.1 RBI">13.1 RBI</channel>
+  <channel update="i" site="clarotv.com.br" site_id="11_#_521" xmltv_id="23.1 TV Seculo 21">23.1 TV Seculo 21</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH921" xmltv_id="30.1 VTV SBT">30.1 VTV SBT</channel>
+  <channel update="i" site="clarotv.com.br" site_id="11_#_484" xmltv_id="32.1 Rede Vida">32.1 Rede Vida</channel>
+  <!-- 32.2 Rede Vida Educacao -->
+  <!-- 32.3 Rede Vida Eduicacao 2 -->
+  <channel update="i" site="hagah.com.br" site_id="cnt" xmltv_id="52.1 CNT">52.1 CNT</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH3652" xmltv_id="56.1 Cancao Nova">56.1 Cancao Nova</channel>
+</settings>
