@@ -26,8 +26,8 @@
 			or https://github.com/SilentButeo2/webgrabplus-siteinipack/tree/master/siteini.pack
   -->
   <channel update="i" site="clarotv.com.br" site_id="11_#_592" xmltv_id="02.1 Record News">02.1 Record News </channel>
-  <channel update="i" site="clarotv.com.br" site_id="11_#_408" xmltv_id="04.1 Band Mais">04.1 Band Mais</channel>
-  <channel update="i" site="vivo.com.br" site_id="LCH1316" xmltv_id="06.1 TV Thathi">06.1 TV Thathi</channel>
+  <channel update="i" site="band.uol.com.br" site_id="Band%20Campinas" xmltv_id="04.1 Band Mais">04.1 Band Mais</channel>
+  <channel update="i" site="vivo.com.br" site_id="LCH2397" xmltv_id="06.1 TV Thathi">06.1 TV Thathi</channel>
   <!-- 08.1 Missing RF TV at https://www.rftvoficial.com.br/programacao/ -->
   <channel update="i" site="clarotv.com.br" site_id="11_#_2066" xmltv_id="10.1 TV Cultura Paulista">10.1 TV Cultura Paulista</channel>
   <channel update="i" site="mi.tv" site_id="br##br_bfb2e086-4b15-4a62-9539-20eccab4c707" xmltv_id="10.2 Univesp TV">10.2 Univesp TV</channel>
