@@ -17,6 +17,10 @@ def add_episode_num(
         programme (xml.dom.minidom.Element): The programme to add the episode number to
         document (xml.dom.minidom.Document): The document that the programme is in
     """
+    if has_episode_num(programme, strict=False):  # iDelete malformed episode_num first
+        episode_nums = programme.getElementsByTagName("episode-num")
+        for ep in episode_nums:
+            programme.removeChild(ep)
     episode_num = document.createElement("episode-num")
     episode_num.setAttribute("system", system)
     episode_num_text = document.createTextNode(content)
@@ -24,7 +28,7 @@ def add_episode_num(
     programme.appendChild(episode_num)
 
 
-def has_episode_num(programme: xml.dom.minidom.Element):
+def has_episode_num(programme: xml.dom.minidom.Element, strict: bool=True):
     """Check if a programme has an episode number
 
     Args:
@@ -33,8 +37,9 @@ def has_episode_num(programme: xml.dom.minidom.Element):
     Returns:
         bool: True if the programme has an episode number, False otherwise
     """
+    title = programme.getElementsByTagName("title")
     episode_num = programme.getElementsByTagName("episode-num")
-    if len(episode_num) > 0:
+    if len(episode_num) > 0 and (not strict or len(episode_num[0].firstChild.nodeValue) >= 4):  # Assuming 's1e1' is the shortest length
         return True
     return False
 
@@ -58,7 +63,7 @@ def main():
         programme = document.getElementsByTagName("programme")
         for p in programme:
             # Check if it already has an episode number
-            if has_episode_num(p):
+            if has_episode_num(p, strict=True):
                 # If it does, skip it
                 continue
             # The season is the first 4 digits of the start time (YYYY) and the episode is the next 4 (MMDD) separated by a dot

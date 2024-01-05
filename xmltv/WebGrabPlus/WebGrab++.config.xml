@@ -6,7 +6,7 @@
   <mode>
   </mode>
   <postprocess grab="y" run="y">/usr/bin/python3 /home/thiago/dev/github/homelab-utility-belt/xmltv/update_episode_num.py --guide /home/thiago/.wg++/guide.xml --save-to /home/thiago/.wg++/guide_with_episode_num.xml</postprocess>
-  <postprocess grab="y" run="y">/usr/bin/python3 /home/thiago/dev/github/homelab-utility-belt/xmltv/logos/add_logo.py --xmltv_in=/home/thiago/.wg++/guide_with_episode_num.xml --logos=/home/thiago/dev/github/homelab-utility-belt/xmltv/logos/my_logos.ini --xmltv_out guide_with_episode_num_icon.xml</postprocess>
+  <postprocess grab="y" run="y">/usr/bin/python3 /home/thiago/dev/github/homelab-utility-belt/xmltv/logos/add_logo.py --xmltv_in=/home/thiago/.wg++/guide_with_episode_num.xml --logos=/home/thiago/dev/github/homelab-utility-belt/xmltv/logos/my_logos.ini --xmltv_out /home/thiago/.wg++/guide_with_episode_num_icon.xml</postprocess>
   <user-agent>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 Edg/79.0.309.71</user-agent>
   <!-- for siteini's that need a decrypt_userkey-->
   <!--<decryptkey site="clarotv.com.br.EK">4K4ZbJ</decryptkey>-->
@@ -37,7 +37,8 @@
   <channel update="i" site="clarotv.com.br" site_id="11_#_1975" xmltv_id="11.3 TV Camara Campinas">11.3 TV Camara Campinas</channel>
   <channel update="i" site="vivo.com.br" site_id="LCH102" xmltv_id="11.4 TV Senado">11.4 TV Senado</channel>
   <!-- 11.5 Missing Radio Camara -->
-  <channel update="i" site="clarotv.com.br" site_id="11_#_1868" xmltv_id="12.1 EPTV">12.1 EPTV</channel>
+  <!--<channel update="i" site="clarotv.com.br" site_id="11_#_1868" xmltv_id="12.1 EPTV">12.1 EPTV</channel>-->
+  <channel update="i" site="redeglobo.globo.com" site_id="sp/eptv/campinas-e-regiao" xmltv_id="12.1 EPTV">12.1 EPTV</channel>
   <!-- 12.2 Missing EducaTV -->
   <channel update="i" site="hagah.com.br" site_id="rbi" xmltv_id="13.1 RBI">13.1 RBI</channel>
   <channel update="i" site="vivo.com.br" site_id="LCH891" xmltv_id="18 Gazeta">18 Gazeta</channel>
