@@ -36,11 +36,11 @@ if [[ ${DSM_MAJOR_VERSION} == 6 ]]; then
     synoservice --restart nmbd
     synoservice --restart smbd
     synoservice --restart avahi
-    synoservice --restart pkgctl-WebStation.service
+    # synoservice --restart pkgctl-WebStation.service
 else
     synosystemctl restart nginx
     synosystemctl restart pkg-synosamba-nmbd.service
     synosystemctl restart pkg-synosamba-smbd.service
     synosystemctl restart avahi
-    synosystemctl restart pkgctl-WebStation.service
+    # synosystemctl restart pkgctl-WebStation.service
 fi
